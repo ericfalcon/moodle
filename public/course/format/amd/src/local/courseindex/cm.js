@@ -30,6 +30,7 @@ import Prefetch from 'core/prefetch';
 import Config from 'core/config';
 import Pending from "core/pending";
 import log from "core/log";
+import {scrollIntoIndex} from 'core_courseformat/local/courseindex/scroll';
 
 // Prefetch the completion icons template.
 const completionTemplate = 'core_courseformat/local/courseindex/cmcompletion';
@@ -103,12 +104,12 @@ export default class Component extends DndCmItem {
         if (window.location.href == cm.url
             || (window.location.href.includes(course.baseurl) && anchor == cm.anchor)
         ) {
-            this.element.scrollIntoView({block: "center"});
+            scrollIntoIndex(this.element, {block: "center"});
         }
         // Check if this we are displaying this activity page.
         if (Config.contextid != Config.courseContextId && Config.contextInstanceId == this.id) {
             this.reactive.dispatch('setPageItem', 'cm', this.id, true);
-            this.element.scrollIntoView({block: "center"});
+            scrollIntoIndex(this.element, {block: "center"});
         }
         // Add anchor logic if the element is not user visible or the element hasn't URL.
         if (!cm.uservisible || !cm.url) {
@@ -169,7 +170,7 @@ export default class Component extends DndCmItem {
         const isPageId = (element.pageItem.type == 'cm' && element.pageItem.id == this.id);
         this.element.classList.toggle(this.classes.PAGEITEM, isPageId);
         if (isPageId && !this.reactive.isEditing) {
-            this.element.scrollIntoView({block: "nearest"});
+            scrollIntoIndex(this.element, {block: "nearest"});
         }
     }
 

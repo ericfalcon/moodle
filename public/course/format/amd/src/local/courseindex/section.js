@@ -27,6 +27,7 @@
 import SectionTitle from 'core_courseformat/local/courseindex/sectiontitle';
 import DndSection from 'core_courseformat/local/courseeditor/dndsection';
 import log from "core/log";
+import {scrollIntoIndex} from 'core_courseformat/local/courseindex/scroll';
 
 export default class Component extends DndSection {
 
@@ -103,7 +104,7 @@ export default class Component extends DndSection {
         // Sections urls may be null.
         if (window.location.href == section?.sectionurl?.replace(/&amp;/g, "&")) {
             this.reactive.dispatch('setPageItem', 'section', this.id);
-            sectionItem.scrollIntoView();
+            scrollIntoIndex(sectionItem);
         }
     }
 
@@ -275,7 +276,7 @@ export default class Component extends DndSection {
         const sectionItem = this.getElement(this.selectors.SECTION_ITEM);
         sectionItem.classList.toggle(this.classes.PAGEITEM, this.pageItem ?? false);
         if (this.pageItem && !this.reactive.isEditing) {
-            this.element.scrollIntoView({block: "nearest"});
+            scrollIntoIndex(this.element, {block: "nearest"});
         }
     }
 

@@ -27,6 +27,7 @@ import {Collapse} from 'bootstrap';
 import {getCurrentCourseEditor} from 'core_courseformat/courseeditor';
 import ContentTree from 'core_courseformat/local/courseeditor/contenttree';
 import log from "core/log";
+import {scrollIntoIndex} from 'core_courseformat/local/courseindex/scroll';
 
 export default class Component extends BaseComponent {
 
@@ -224,7 +225,7 @@ export default class Component extends BaseComponent {
         if (section.indexcollapsed) {
             this._expandSectionNode(section, true);
             setTimeout(
-                () => this.cms[element.pageItem.id]?.scrollIntoView({block: "nearest"}),
+                () => scrollIntoIndex(this.cms[element.pageItem.id], {block: "nearest"}),
                 250
             );
         }
