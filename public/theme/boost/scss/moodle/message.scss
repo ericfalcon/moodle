@@ -574,8 +574,9 @@ $message-day-color: color-contrast($message-app-bg) !default;
     }
 }
 #page-message-index {
+    // The header is hidden visually only: its heading "Messages" is the heading of level 1 of the page.
     #page-header {
-        display: none;
+        @include visually-hidden();
     }
     #region-main {
         height: 100%;
