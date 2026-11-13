@@ -61,3 +61,11 @@ Feature: Clear my answers
     And I follow "Finish attempt ..."
     And I click on "Return to attempt" "button"
     Then I should not see "Clear my choice"
+
+  @javascript
+  Scenario: Leave the choices with the tab key before choosing an answer
+    Given I am on the "Quiz 1" "quiz activity" page logged in as student
+    When I press "Attempt quiz"
+    And I set the focus on the "input[type='radio'][value='0']" "css_element"
+    And I press the tab key
+    Then the focused element is "Check" "button" in the "Question One" "question"

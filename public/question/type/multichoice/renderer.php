@@ -324,12 +324,13 @@ class qtype_multichoice_single_renderer extends qtype_multichoice_renderer_base 
         ];
 
         // When no choice selected during rendering, then hide the clear choice option.
-        // We are using .visually-hidden and aria-hidden together so while the element is hidden
-        // from both the monitor and the screen-reader, it is still tabbable.
+        // It is hidden from the monitor and the screen-reader, and inert: its radio, checked, must not be the tab stop
+        // of the group, or the tab key could not leave the choices.
         $linktabindex = 0;
         if (!$hascheckedchoice && $response == -1) {
             $clearchoicewrapperattrs['class'] .= ' visually-hidden';
             $clearchoicewrapperattrs['aria-hidden'] = 'true';
+            $clearchoicewrapperattrs['inert'] = 'inert';
             $clearchoiceradioattrs['checked'] = 'checked';
             $linktabindex = -1;
         }

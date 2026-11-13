@@ -55,10 +55,11 @@ define(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
      * @param {Object} clearChoiceContainer The clear choice option container.
      */
     var hideClearChoiceOption = function(clearChoiceContainer) {
-        // We are using .visually-hidden and aria-hidden together so while the element is hidden
-        // from both the monitor and the screen-reader, it is still tabbable.
+        // The option is hidden from the monitor and the screen-reader, and inert: its radio, checked while no choice is
+        // selected, must not be the tab stop of the group, or the tab key could not leave the choices.
         clearChoiceContainer.addClass('visually-hidden');
         clearChoiceContainer.attr('aria-hidden', true);
+        clearChoiceContainer.prop('inert', true);
         clearChoiceContainer.find(SELECTORS.LINK).attr('tabindex', -1);
     };
 
@@ -70,6 +71,7 @@ define(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
     var showClearChoiceOption = function(clearChoiceContainer) {
         clearChoiceContainer.removeClass('visually-hidden');
         clearChoiceContainer.removeAttr('aria-hidden');
+        clearChoiceContainer.prop('inert', false);
         clearChoiceContainer.find(SELECTORS.LINK).attr('tabindex', 0);
         clearChoiceContainer.find(SELECTORS.RADIO).prop('disabled', true);
     };
@@ -96,13 +98,6 @@ define(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
         root.on('change', SELECTORS.CHOICE_ELEMENT, function() {
             // If the event has been triggered by any other choice, show the clear choice option.
             showClearChoiceOption(clearChoiceContainer);
-        });
-
-        // If the clear choice radio receives focus from using the tab key, return the focus
-        // to the first answer option.
-        clearChoiceContainer.find(SELECTORS.RADIO).focus(function() {
-            var firstChoice = root.find(SELECTORS.CHOICE_ELEMENT).first();
-            firstChoice.focus();
         });
     };
 
