@@ -59,8 +59,10 @@
                 </div>
             {{/throttlingwarningmsg}}
             <form data-post-id="{{postid}}" data-content="inpage-reply-form" action="{{{reply_url}}}">
+                <label for="inpage-reply-message-{{uniqid}}" class="visually-hidden">{{#str}} message, mod_forum {{/str}}</label>
                 <textarea
                     name="post"
+                    id="inpage-reply-message-{{uniqid}}"
                     rows="3"
                     class="w-100"
                     {{#parentauthorname}}

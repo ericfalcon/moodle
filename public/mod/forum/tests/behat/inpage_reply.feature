@@ -40,3 +40,11 @@ Feature: Students can reply to a discussion in page.
     And I should see "This is a private reply. (Teachers and other users with the capability to view private replies can also see it.)"
     And I reload the page
     And I should see "Discussion contents 1, third message"
+
+  Scenario: The inpage reply field is named by its label
+    Given I am on the "Test forum name" "forum activity" page logged in as student1
+    And I follow "Discussion 2"
+    And I follow "Reply"
+    When I set the field "Message" to "Discussion contents 2, labelled reply"
+    And I press "Post to forum"
+    Then I should see "Discussion contents 2, labelled reply"

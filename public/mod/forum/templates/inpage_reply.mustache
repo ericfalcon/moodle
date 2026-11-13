@@ -44,7 +44,8 @@
         <form data-post-id="{{postid}}" id="inpage-reply-{{postid}}" data-content="inpage-reply-form" action="{{{reply_url}}}">
             <div class="pb-2">
                 <span>
-                    <textarea rows="5" name="post" title="{{#str}} message, mod_forum {{/str}}" class="form-control" placeholder="{{#str}} replyplaceholder, forum {{/str}}"></textarea>
+                    <label for="inpage-reply-message-{{uniqid}}" class="visually-hidden">{{#str}} message, mod_forum {{/str}}</label>
+                    <textarea rows="5" name="post" id="inpage-reply-message-{{uniqid}}" class="form-control" placeholder="{{#str}} replyplaceholder, forum {{/str}}"></textarea>
                     <input type="hidden" name="postformat" value="{{postformat}}"/>
                 </span>
                 <input type="hidden" name="subject" value="{{parentsubject}}"/>
