@@ -43,5 +43,6 @@
     </span>
 {{/items}}
 {{^items}}
-    <span class="m-1 h-5">{{noSelectionString}}</span>
+    {{! Not an option of the listbox: hidden from assistive technologies, which say that the list is empty. }}
+    <span class="m-1 h-5" aria-hidden="true">{{noSelectionString}}</span>
 {{/items}}

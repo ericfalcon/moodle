@@ -83,3 +83,9 @@ Feature: Autocomplete functionality in forms
     And I click on "Jane Jones" "autocomplete_selection"
     And "Jane Jones" "autocomplete_selection" should not exist
     And I should see "No selection" in the ".form-autocomplete-selection" "css_element"
+
+  @accessibility
+  Scenario: The empty selection of an autocomplete element meets accessibility standards
+    Given I am on the "autocomplete-disabledif" "core_form > Fixture" page logged in as "admin"
+    Then I should see "No selection" in the ".form-autocomplete-selection" "css_element"
+    And the ".form-autocomplete-selection" "css_element" should meet accessibility standards
